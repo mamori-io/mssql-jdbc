@@ -802,7 +802,7 @@ public interface ISQLServerDataSource extends javax.sql.CommonDataSource {
     int getSocketTimeout();
 
     /**
-     * Sets the login configuration file for Kerberos authentication. This overrides the default configuration <i>
+     * Sets the login configuration name for Kerberos authentication. This overrides the default configuration <i>
      * SQLJDBCDriver </i>
      * 
      * @param configurationName
@@ -814,7 +814,7 @@ public interface ISQLServerDataSource extends javax.sql.CommonDataSource {
     void setJASSConfigurationName(String configurationName);
 
     /**
-     * Returns the login configuration file for Kerberos authentication.
+     * Returns the login configuration name for Kerberos authentication.
      *
      * 
      * @return login configuration file name
@@ -825,7 +825,7 @@ public interface ISQLServerDataSource extends javax.sql.CommonDataSource {
     String getJASSConfigurationName();
 
     /**
-     * Sets the login configuration file for Kerberos authentication. This overrides the default configuration <i>
+     * Sets the login configuration name for Kerberos authentication. This overrides the default configuration <i>
      * SQLJDBCDriver </i>
      * 
      * 
@@ -835,12 +835,27 @@ public interface ISQLServerDataSource extends javax.sql.CommonDataSource {
     void setJAASConfigurationName(String configurationName);
 
     /**
-     * Returns the login configuration file for Kerberos authentication.
+     * Returns the login configuration name for Kerberos authentication.
      * 
-     * @return login configuration file name
+     * @return login configuration name
      */
     String getJAASConfigurationName();
 
+    /**
+     * Returns whether the system-wide JAAS configuration should be ignored and the default Kerberos configuration
+     * used.
+     *
+     * @return ignoreSystemJaas boolean value
+     */
+    boolean getIgnoreSystemJaas();
+
+    /**
+     * Sets whether the system-wide JAAS configuration should be ignored.
+     *
+     * @param ignoreSystemJaas
+     *         boolean property to ignore
+     */
+    void setIgnoreSystemJaas(boolean ignoreSystemJaas);
     /**
      * Sets whether Fips Mode should be enabled/disabled on the connection. For FIPS enabled JVM this property should be
      * true.

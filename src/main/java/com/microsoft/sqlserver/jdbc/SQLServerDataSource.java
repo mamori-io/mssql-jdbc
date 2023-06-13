@@ -1030,6 +1030,18 @@ public class SQLServerDataSource
                 SQLServerDriverStringProperty.JAAS_CONFIG_NAME.getDefaultValue());
     }
 
+    @Override
+    public boolean getIgnoreSystemJaas() {
+        return getBooleanProperty(connectionProps, SQLServerDriverBooleanProperty.IGNORE_SYSTEM_JAAS.toString(),
+                SQLServerDriverBooleanProperty.IGNORE_SYSTEM_JAAS.getDefaultValue());
+    }
+
+    @Override
+    public void setIgnoreSystemJaas(boolean ignoreSystemJaas) {
+        setBooleanProperty(connectionProps, SQLServerDriverBooleanProperty.IGNORE_SYSTEM_JAAS.toString(),
+                ignoreSystemJaas);
+    }
+
     /**
      * @deprecated This method is deprecated. Use {@link SQLServerDataSource#setUser(String user)} instead.
      *
