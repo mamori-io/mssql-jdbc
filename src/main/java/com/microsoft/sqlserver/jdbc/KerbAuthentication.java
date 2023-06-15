@@ -79,8 +79,7 @@ final class KerbAuthentication extends SSPIAuthentication {
                     AccessControlContext context = AccessController.getContext();
                     currentSubject = Subject.getSubject(context);
                     if (null == currentSubject) {
-                        LoginContext lc;
-                        if (Boolean.valueOf(con.activeConnectionProperties.getProperty(
+                        if (Boolean.parseBoolean(con.activeConnectionProperties.getProperty(
                                 SQLServerDriverBooleanProperty.IGNORE_SYSTEM_JAAS.toString(), Boolean.toString(
                                         SQLServerDriverBooleanProperty.IGNORE_SYSTEM_JAAS.getDefaultValue())))) {
                             lc = new LoginContext(configName, null, callback, new JaasConfiguration(null));
