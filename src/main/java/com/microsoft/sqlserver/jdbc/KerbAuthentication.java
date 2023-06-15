@@ -83,8 +83,7 @@ final class KerbAuthentication extends SSPIAuthentication {
                         if (Boolean.valueOf(con.activeConnectionProperties.getProperty(
                                 SQLServerDriverBooleanProperty.IGNORE_SYSTEM_JAAS.toString(), Boolean.toString(
                                         SQLServerDriverBooleanProperty.IGNORE_SYSTEM_JAAS.getDefaultValue())))) {
-                            lc = new LoginContext(configName, null, callback,
-                                    new JaasConfiguration(Configuration.getConfiguration()));
+                            lc = new LoginContext(configName, null, callback, new JaasConfiguration(null));
                         } else {
                             lc = new LoginContext(configName, callback);
                         }
