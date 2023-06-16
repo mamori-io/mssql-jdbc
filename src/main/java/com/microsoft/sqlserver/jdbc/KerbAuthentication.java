@@ -73,15 +73,25 @@ final class KerbAuthentication extends SSPIAuthentication {
                 String configName = con.activeConnectionProperties.getProperty(
                         SQLServerDriverStringProperty.JAAS_CONFIG_NAME.toString(),
                         SQLServerDriverStringProperty.JAAS_CONFIG_NAME.getDefaultValue());
+                boolean useDefaultJaas = Boolean.parseBoolean(con.activeConnectionProperties.getProperty(
+                        SQLServerDriverBooleanProperty.USE_DEFAULT_JAAS_CONFIG.toString(),
+                        Boolean.toString(SQLServerDriverBooleanProperty.USE_DEFAULT_JAAS_CONFIG.getDefaultValue())));
+
+                if (!configName.equals(
+                        SQLServerDriverStringProperty.JAAS_CONFIG_NAME.getDefaultValue()) && useDefaultJaas) {
+                    if (authLogger.isLoggable(Level.WARNING)) {
+                        authLogger.warning(toString() + String.format(
+                                "Using default JAAS configuration, configured %s=%s will not be used.",
+                                SQLServerDriverStringProperty.JAAS_CONFIG_NAME, configName));
+                    }
+                }
                 Subject currentSubject;
                 KerbCallback callback = new KerbCallback(con);
                 try {
                     AccessControlContext context = AccessController.getContext();
                     currentSubject = Subject.getSubject(context);
                     if (null == currentSubject) {
-                        if (Boolean.parseBoolean(con.activeConnectionProperties.getProperty(
-                                SQLServerDriverBooleanProperty.IGNORE_SYSTEM_JAAS.toString(), Boolean.toString(
-                                        SQLServerDriverBooleanProperty.IGNORE_SYSTEM_JAAS.getDefaultValue())))) {
+                        if (useDefaultJaas) {
                             lc = new LoginContext(configName, null, callback, new JaasConfiguration(null));
                         } else {
                             lc = new LoginContext(configName, callback);

@@ -1031,15 +1031,15 @@ public class SQLServerDataSource
     }
 
     @Override
-    public boolean getIgnoreSystemJaas() {
-        return getBooleanProperty(connectionProps, SQLServerDriverBooleanProperty.IGNORE_SYSTEM_JAAS.toString(),
-                SQLServerDriverBooleanProperty.IGNORE_SYSTEM_JAAS.getDefaultValue());
+    public boolean getUseDefaultJaasConfig() {
+        return getBooleanProperty(connectionProps, SQLServerDriverBooleanProperty.USE_DEFAULT_JAAS_CONFIG.toString(),
+                SQLServerDriverBooleanProperty.USE_DEFAULT_JAAS_CONFIG.getDefaultValue());
     }
 
     @Override
-    public void setIgnoreSystemJaas(boolean ignoreSystemJaas) {
-        setBooleanProperty(connectionProps, SQLServerDriverBooleanProperty.IGNORE_SYSTEM_JAAS.toString(),
-                ignoreSystemJaas);
+    public void setUseDefaultJaasConfig(boolean useDefaultJaasConfig) {
+        setBooleanProperty(connectionProps, SQLServerDriverBooleanProperty.USE_DEFAULT_JAAS_CONFIG.toString(),
+                useDefaultJaasConfig);
     }
 
     /**

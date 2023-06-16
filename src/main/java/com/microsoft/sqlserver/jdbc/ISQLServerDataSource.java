@@ -842,20 +842,20 @@ public interface ISQLServerDataSource extends javax.sql.CommonDataSource {
     String getJAASConfigurationName();
 
     /**
-     * Returns whether the system-wide JAAS configuration should be ignored and the default Kerberos configuration
-     * used.
+     * Returns whether the default JAAS Configuration should be used
      *
-     * @return ignoreSystemJaas boolean value
+     * @return useDefaultJaasConfig boolean value
      */
-    boolean getIgnoreSystemJaas();
+    boolean getUseDefaultJaasConfig();
 
     /**
-     * Sets whether the system-wide JAAS configuration should be ignored.
+     * Sets whether the default JAAS Configuration will be used.  This means the system-wide JAAS configuration
+     * is ignored to avoid conflicts with libraries that override the JAAS configuration.
      *
-     * @param ignoreSystemJaas
-     *         boolean property to ignore
+     * @param useDefaultJaasConfig
+     *         boolean property to use the default JAAS configuration
      */
-    void setIgnoreSystemJaas(boolean ignoreSystemJaas);
+    void setUseDefaultJaasConfig(boolean useDefaultJaasConfig);
     /**
      * Sets whether Fips Mode should be enabled/disabled on the connection. For FIPS enabled JVM this property should be
      * true.
