@@ -79,6 +79,8 @@ final class KerbAuthentication extends SSPIAuthentication {
 
                 if (!configName.equals(
                         SQLServerDriverStringProperty.JAAS_CONFIG_NAME.getDefaultValue()) && useDefaultJaas) {
+                    // Reset configName to default -- useDefaultJaas setting takes priority over jaasConfigName
+                    configName = SQLServerDriverStringProperty.JAAS_CONFIG_NAME.getDefaultValue();
                     if (authLogger.isLoggable(Level.WARNING)) {
                         authLogger.warning(toString() + String.format(
                                 "Using default JAAS configuration, configured %s=%s will not be used.",
