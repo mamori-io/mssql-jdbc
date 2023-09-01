@@ -87,8 +87,8 @@ public class FipsTest extends AbstractTest {
         props.remove(Constants.TRUST_SERVER_CERTIFICATE);
 
         String connStr = TestUtils.removeProperty(connectionString, "encrypt");
-        connStr = TestUtils.removeProperty(connectionString, "trustServerCertifcate");
-        connStr = TestUtils.removeProperty(connectionString, "serverCertificate");
+        connStr = TestUtils.removeProperty(connStr, "trustServerCertifcate");
+        connStr = TestUtils.removeProperty(connStr, "serverCertificate");
 
         try (Connection con = PrepUtil.getConnection(connStr, props)) {
             Assertions.assertTrue(!StringUtils.isEmpty(con.getSchema()));
