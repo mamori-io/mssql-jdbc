@@ -84,6 +84,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testJksName(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try {
             SQLServerColumnEncryptionJavaKeyStoreProvider jksp = new SQLServerColumnEncryptionJavaKeyStoreProvider(
@@ -104,6 +105,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testAkvName(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         SQLServerColumnEncryptionAzureKeyVaultProvider akv = new SQLServerColumnEncryptionAzureKeyVaultProvider(
                 applicationClientID, applicationKey);
@@ -120,6 +122,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testBadJks(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try {
             SQLServerColumnEncryptionJavaKeyStoreProvider jksp = new SQLServerColumnEncryptionJavaKeyStoreProvider(null,
@@ -138,6 +141,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testBadAkvCallback(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try {
             SQLServerColumnEncryptionAzureKeyVaultProvider akv = new SQLServerColumnEncryptionAzureKeyVaultProvider(
@@ -156,6 +160,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testBadAkvTokenCredential(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try {
             SQLServerColumnEncryptionAzureKeyVaultProvider akv = new SQLServerColumnEncryptionAzureKeyVaultProvider(
@@ -173,6 +178,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testJksBadEncryptColumnEncryptionKey(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         SQLServerColumnEncryptionJavaKeyStoreProvider jksp = null;
         char[] secret = new char[1];
@@ -207,6 +213,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testAkvBadEncryptColumnEncryptionKey(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         SQLServerColumnEncryptionAzureKeyVaultProvider akv = null;
         akv = new SQLServerColumnEncryptionAzureKeyVaultProvider(applicationClientID, applicationKey);
@@ -236,6 +243,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testJksDecryptColumnEncryptionKey(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         SQLServerColumnEncryptionJavaKeyStoreProvider jksp = null;
         char[] secret = new char[1];
@@ -285,6 +293,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testAkvDecryptColumnEncryptionKey(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         SQLServerColumnEncryptionAzureKeyVaultProvider akv = null;
         akv = new SQLServerColumnEncryptionAzureKeyVaultProvider(applicationClientID, applicationKey);
@@ -362,6 +371,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testCharSpecificSetter(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -380,6 +390,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testCharSpecificSetterAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -398,6 +409,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testCharSpecificSetterWindows(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         org.junit.Assume.assumeTrue(isWindows);
 
@@ -418,6 +430,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testCharSetObjectAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -436,6 +449,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testCharSetObject(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -454,6 +468,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testCharSetObjectWithJDBCTypesAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -472,6 +487,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testCharSetObjectWithJDBCTypes(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -490,6 +506,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testCharSpecificSetterNullAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -508,6 +525,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testCharSpecificSetterNull(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -526,6 +544,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testCharSetObjectNullAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -562,6 +581,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testCharSetNullAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -580,6 +600,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testCharSetNull(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -598,6 +619,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testBinarySpecificSetterAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -616,6 +638,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testBinarySpecificSetter(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -636,6 +659,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
         org.junit.Assume.assumeTrue(isWindows);
 
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -654,6 +678,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testBinarySetobjectAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -672,6 +697,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testBinarySetobject(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -690,6 +716,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testBinarySetNullAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -708,6 +735,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testBinarySetNull(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -726,6 +754,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testBinarySpecificSetterNullAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -744,6 +773,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testBinarySpecificSetterNull(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -762,6 +792,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testBinarysetObjectNullAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -780,6 +811,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testBinarysetObjectNull(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -798,6 +830,8 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testBinarySetObjectWithJDBCTypesAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
+
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
             LinkedList<byte[]> values = createBinaryValues(false);
@@ -815,6 +849,8 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testBinarySetObjectWithJDBCTypes(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
+
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
             LinkedList<byte[]> values = createBinaryValues(false);
@@ -832,6 +868,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testDateSpecificSetterAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -870,6 +907,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
         org.junit.Assume.assumeTrue(isWindows);
 
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -888,6 +926,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testDateSetObjectAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -906,6 +945,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testDateSetObject(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -924,6 +964,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testDateSetObjectWithJavaTypeAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -942,6 +983,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testDateSetObjectWithJavaType(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -960,6 +1002,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testDateSetObjectWithJDBCTypeAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -978,6 +1021,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testDateSetObjectWithJDBCType(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -996,6 +1040,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testDateSpecificSetterMinMaxValueAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -1034,6 +1079,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testDateSetNullAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -1057,6 +1103,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testDateSetNull(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -1080,6 +1127,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testDateSetObjectNullAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         RandomData.returnNull = true;
         nullable = true;
@@ -1104,6 +1152,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testDateSetObjectNull(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         RandomData.returnNull = true;
         nullable = true;
@@ -1128,6 +1177,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testNumericSpecificSetterAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -1149,6 +1199,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testNumericSpecificSetter(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -1172,6 +1223,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
         org.junit.Assume.assumeTrue(isWindows);
 
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -1193,6 +1245,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testNumericSetObjectAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -1213,6 +1266,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testNumericSetObject(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -1233,6 +1287,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testNumericSetObjectWithJDBCTypesAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -1253,6 +1308,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testNumericSetObjectWithJDBCTypes(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -1273,6 +1329,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testNumericSpecificSetterMaxValueAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -1299,6 +1356,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testNumericSpecificSetterMaxValue(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -1325,6 +1383,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testNumericSpecificSetterMinValueAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -1350,6 +1409,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testNumericSpecificSetterMinValue(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -1375,6 +1435,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testNumericSpecificSetterNullAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -1400,6 +1461,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testNumericSpecificSetterNull(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -1426,6 +1488,8 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     public void testNumericSpecificSetterSetObjectNullAkv(String serverName, String url,
             String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
+
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
             nullable = true;
@@ -1475,6 +1539,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testNumericNormalizationAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
@@ -1524,6 +1589,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testAEFMTOnly(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection c = PrepUtil.getConnection(AETestConnectionString + ";useFmtOnly=true", AEInfo);
                 Statement s = c.createStatement()) {
@@ -2236,6 +2302,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testAkvNameWithAuthCallback(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try {
             SQLServerColumnEncryptionAzureKeyVaultProvider akv = new SQLServerColumnEncryptionAzureKeyVaultProvider(
@@ -2253,6 +2320,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testAkvNameWithTokenCredential(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         ClientSecretCredential credential = new ClientSecretCredentialBuilder().tenantId(tenantID)
                 .clientId(applicationClientID).clientSecret(applicationKey).build();
@@ -2274,6 +2342,7 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
     public void testAkvBadEncryptColumnEncryptionKeyWithAuthCallback(String serverName, String url,
             String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         SQLServerColumnEncryptionAzureKeyVaultProvider akv = null;
         try {

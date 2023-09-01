@@ -181,11 +181,6 @@ public class AESetup extends AbstractTest {
                     + Constants.ENCLAVE_ATTESTATIONPROTOCOL + "=" + protocol;
             AETestConnectionString = connectionString + ";sendTimeAsDateTime=false;columnEncryptionSetting=enabled;"
                     + enclaveProperties;
-
-            // show progress if testing multiple servers
-            if (enclaveServer.length > 1) {
-                System.out.println("Testing enclave: " + enclaveProperties);
-            }
         } else {
             AETestConnectionString = connectionString + ";sendTimeAsDateTime=false;columnEncryptionSetting=enabled;";
         }
@@ -194,6 +189,13 @@ public class AESetup extends AbstractTest {
         AETestConnectionString += ";encrypt=false;trustServerCertificate=true;";
     }
 
+    static void printEnclaveProperties() {
+        // show progress if testing multiple servers
+        if (enclaveServer.length > 1) {
+            System.out.println("Testing enclave: " + enclaveProperties);
+        } 
+    }
+    
     @BeforeAll
     public static void setupAETest() throws Exception {
         setConnection();
@@ -222,6 +224,7 @@ public class AESetup extends AbstractTest {
             param[i][2] = protocol;
 
             setAEConnectionString(serverName, url, protocol);
+            printEnclaveProperties();
 
             createCMK(AETestConnectionString, cmkJks, Constants.JAVA_KEY_STORE_NAME, javaKeyAliases,
                     TestUtils.byteToHexDisplayString(jksProvider.signColumnMasterKeyMetadata(javaKeyAliases, true)));

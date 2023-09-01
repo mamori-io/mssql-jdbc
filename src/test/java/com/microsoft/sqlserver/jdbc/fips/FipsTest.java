@@ -86,7 +86,11 @@ public class FipsTest extends AbstractTest {
         props.remove(Constants.ENCRYPT);
         props.remove(Constants.TRUST_SERVER_CERTIFICATE);
 
-        try (Connection con = PrepUtil.getConnection(connectionString, props)) {
+        String connStr = TestUtils.removeProperty(connectionString, "encrypt");
+        connStr = TestUtils.removeProperty(connectionString, "trustServerCertifcate");
+        connStr = TestUtils.removeProperty(connectionString, "serverCertificate");
+
+        try (Connection con = PrepUtil.getConnection(connStr, props)) {
             Assertions.assertTrue(!StringUtils.isEmpty(con.getSchema()));
         } catch (Exception e) {
             fail(TestResource.getResource("R_unexpectedErrorMessage") + e.getMessage());

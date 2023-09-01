@@ -54,6 +54,8 @@ public class EnclaveTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testBasicConnection(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
+
         EnclavePackageTest.testBasicConnection(AETestConnectionString, protocol);
     }
 
@@ -156,6 +158,7 @@ public class EnclaveTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testAEv2NotSupported(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         boolean isAEv2 = false;
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo)) {
@@ -176,6 +179,7 @@ public class EnclaveTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testAEv2Disabled(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         // connection string w/o AEv2
         String testConnectionString = TestUtils.removeProperty(AETestConnectionString,
@@ -203,6 +207,7 @@ public class EnclaveTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testVerifyBadJksSignature(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         // create CMK with a bad signature
         String badCmk = Constants.CMK_NAME + "_badCMK";
@@ -249,6 +254,7 @@ public class EnclaveTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testVerifyBadAkvSignature(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         // create CMK with a bad signature
         String badCmk = Constants.CMK_NAME + "_badCMK";
@@ -295,6 +301,7 @@ public class EnclaveTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testVerifyBadWinSignature(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         String badCmk = Constants.CMK_NAME + "_badCMK";
         String badCek = Constants.CEK_NAME + "_badCek";
@@ -342,6 +349,8 @@ public class EnclaveTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testChar(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
+
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
             TestUtils.dropTableIfExists(CHAR_TABLE_AE, stmt);
@@ -359,6 +368,8 @@ public class EnclaveTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testCharAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
+
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement()) {
             TestUtils.dropTableIfExists(CHAR_TABLE_AE, stmt);
@@ -377,6 +388,8 @@ public class EnclaveTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testAEFMTOnly(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
+
         try (SQLServerConnection c = PrepUtil.getConnection(AETestConnectionString + ";useFmtOnly=true", AEInfo);
                 Statement s = c.createStatement()) {
             createTable(NUMERIC_TABLE_AE, cekJks, numericTable);
@@ -397,6 +410,8 @@ public class EnclaveTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testAlter(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
+
         try (SQLServerConnection c = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 Statement s = c.createStatement()) {
             createTable(CHAR_TABLE_AE, cekJks, varcharTableSimple);
@@ -418,6 +433,8 @@ public class EnclaveTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testNumericRichQuery(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
+
         try (SQLServerConnection c = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 Statement s = c.createStatement()) {
             createTable(NUMERIC_TABLE_AE, cekJks, numericTableSimple);
@@ -445,6 +462,8 @@ public class EnclaveTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testStringRichQuery(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
+
         try (SQLServerConnection c = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 Statement s = c.createStatement()) {
             createTable(CHAR_TABLE_AE, cekJks, varcharTableSimple);
@@ -473,6 +492,8 @@ public class EnclaveTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testAlterNoEncrypt(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
+
         try (SQLServerConnection c = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 Statement s = c.createStatement()) {
             createTable(CHAR_TABLE_AE, cekJks, varcharTableSimple);

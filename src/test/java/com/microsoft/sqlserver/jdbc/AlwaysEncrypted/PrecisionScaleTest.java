@@ -82,6 +82,8 @@ public class PrecisionScaleTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testNumericPrecision8Scale2(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
+
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement();
                 SQLServerPreparedStatement pstmt = (SQLServerPreparedStatement) TestUtils.getPreparedStmt(con,
@@ -99,6 +101,8 @@ public class PrecisionScaleTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testDateScale2(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
+
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement();
                 SQLServerPreparedStatement pstmt = (SQLServerPreparedStatement) TestUtils.getPreparedStmt(con,
@@ -122,6 +126,7 @@ public class PrecisionScaleTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testNumericPrecision8Scale0(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement();
@@ -140,6 +145,8 @@ public class PrecisionScaleTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testDateScale0(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
+
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement();
                 SQLServerPreparedStatement pstmt = (SQLServerPreparedStatement) TestUtils.getPreparedStmt(con,
@@ -163,6 +170,8 @@ public class PrecisionScaleTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testNumericPrecision8Scale2Null(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
+
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement();
                 SQLServerPreparedStatement pstmt = (SQLServerPreparedStatement) TestUtils.getPreparedStmt(con,
@@ -180,6 +189,8 @@ public class PrecisionScaleTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testDateScale2Null(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
+
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement();
                 SQLServerPreparedStatement pstmt = (SQLServerPreparedStatement) TestUtils.getPreparedStmt(con,
@@ -197,6 +208,8 @@ public class PrecisionScaleTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testDateScale5Null(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
+
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement();
                 SQLServerPreparedStatement pstmt = (SQLServerPreparedStatement) TestUtils.getPreparedStmt(con,
@@ -217,6 +230,7 @@ public class PrecisionScaleTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testMultiBatchNumeric(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement();
@@ -238,6 +252,7 @@ public class PrecisionScaleTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testMultiBatchDate(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
 
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement();
@@ -258,6 +273,8 @@ public class PrecisionScaleTest extends AESetup {
     @MethodSource("enclaveParams")
     public void testMultiBatch(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
+        printEnclaveProperties();
+
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
                 SQLServerStatement stmt = (SQLServerStatement) con.createStatement();
                 SQLServerPreparedStatement pstmt = (SQLServerPreparedStatement) TestUtils.getPreparedStmt(con,
