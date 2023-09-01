@@ -64,6 +64,7 @@ import microsoft.sql.DateTimeOffset;
 @Tag(Constants.xSQLv12)
 @Tag(Constants.xAzureSQLDW)
 @Tag(Constants.xAzureSQLDB)
+@Tag(Constants.reqExternalSetup)
 public class JDBCEncryptionDecryptionTest extends AESetup {
     private boolean nullable = false;
 
@@ -101,7 +102,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
      */
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testAkvName(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
 
@@ -205,7 +205,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
      */
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testAkvBadEncryptColumnEncryptionKey(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
 
@@ -284,7 +283,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
      */
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testAkvDecryptColumnEncryptionKey(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
 
@@ -380,7 +378,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
      */
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testCharSpecificSetterAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
 
@@ -399,7 +396,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
      */
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testCharSpecificSetterWindows(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
 
@@ -420,7 +416,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
      */
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testCharSetObjectAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
 
@@ -457,7 +452,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
      */
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testCharSetObjectWithJDBCTypesAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
 
@@ -494,7 +488,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
      */
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testCharSpecificSetterNullAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
 
@@ -531,7 +524,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
      */
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testCharSetObjectNullAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
 
@@ -568,7 +560,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
      */
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testCharSetNullAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
 
@@ -605,7 +596,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
      */
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testBinarySpecificSetterAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
 
@@ -642,7 +632,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
      */
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testBinarySpecificSetterWindows(String serverName, String url, String protocol) throws Exception {
         org.junit.Assume.assumeTrue(isWindows);
 
@@ -663,7 +652,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
      */
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testBinarySetobjectAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
 
@@ -700,7 +688,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
      */
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testBinarySetNullAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
 
@@ -737,7 +724,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
      */
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testBinarySpecificSetterNullAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
 
@@ -774,7 +760,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
      */
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testBinarysetObjectNullAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
 
@@ -811,7 +796,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
      */
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testBinarySetObjectWithJDBCTypesAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
         try (SQLServerConnection con = PrepUtil.getConnection(AETestConnectionString, AEInfo);
@@ -846,7 +830,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
      */
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testDateSpecificSetterAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
 
@@ -883,7 +866,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
      */
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testDateSpecificSetterWindows(String serverName, String url, String protocol) throws Exception {
         org.junit.Assume.assumeTrue(isWindows);
 
@@ -904,7 +886,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
      */
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testDateSetObjectAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
 
@@ -941,7 +922,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
      */
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testDateSetObjectWithJavaTypeAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
 
@@ -978,7 +958,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
      */
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testDateSetObjectWithJDBCTypeAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
 
@@ -1015,7 +994,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
      */
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testDateSpecificSetterMinMaxValueAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
 
@@ -1054,7 +1032,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
      */
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testDateSetNullAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
 
@@ -1101,7 +1078,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
      */
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testDateSetObjectNullAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
 
@@ -1150,7 +1126,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
      */
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testNumericSpecificSetterAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
 
@@ -1193,7 +1168,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
      */
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testNumericSpecificSetterWindows(String serverName, String url, String protocol) throws Exception {
         org.junit.Assume.assumeTrue(isWindows);
 
@@ -1217,7 +1191,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
      */
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testNumericSetObjectAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
 
@@ -1258,7 +1231,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
      */
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testNumericSetObjectWithJDBCTypesAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
 
@@ -1299,7 +1271,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
      */
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testNumericSpecificSetterMaxValueAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
 
@@ -1352,7 +1323,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
      */
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testNumericSpecificSetterMinValueAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
 
@@ -1403,7 +1373,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
      */
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testNumericSpecificSetterNullAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
 
@@ -1454,7 +1423,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
      */
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testNumericSpecificSetterSetObjectNullAkv(String serverName, String url,
             String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
@@ -1505,7 +1473,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
      */
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testNumericNormalizationAkv(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
 
@@ -2267,7 +2234,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
 
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testAkvNameWithAuthCallback(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
 
@@ -2285,7 +2251,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
 
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testAkvNameWithTokenCredential(String serverName, String url, String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
 
@@ -2306,7 +2271,6 @@ public class JDBCEncryptionDecryptionTest extends AESetup {
 
     @ParameterizedTest
     @MethodSource("enclaveParams")
-    @Tag(Constants.reqExternalSetup)
     public void testAkvBadEncryptColumnEncryptionKeyWithAuthCallback(String serverName, String url,
             String protocol) throws Exception {
         setAEConnectionString(serverName, url, protocol);
