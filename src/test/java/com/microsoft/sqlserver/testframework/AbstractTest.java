@@ -103,6 +103,7 @@ public abstract class AbstractTest {
     protected static Connection connectionAzure = null;
     protected static String connectionString = null;
     protected static String connectionStringNTLM;
+    protected static String connectionStringKerberos;
 
     protected static ConfidentialClientApplication fedauthClientApp = null;
 
@@ -249,11 +250,16 @@ public abstract class AbstractTest {
 
     protected static void setupConnectionString() {
         connectionStringNTLM = connectionString;
+        connectionStringKerberos = connectionString;
 
-        // if these properties are defined then NTLM is desired, modify connection string accordingly
+        // If these properties are defined then NTLM is desired, modify connection string accordingly
         String domain = getConfiguredProperty("domainNTLM");
         String user = getConfiguredProperty("userNTLM");
         String password = getConfiguredProperty("passwordNTLM");
+
+        // If kerberos is set and required
+        String integratedSecurity = getConfiguredProperty("integratedSecurity");
+        String authenticationScheme = getConfiguredProperty("JavaKerberos");
 
         if (null != domain) {
             connectionStringNTLM = TestUtils.addOrOverrideProperty(connectionStringNTLM, "domain", domain);
@@ -271,6 +277,11 @@ public abstract class AbstractTest {
             connectionStringNTLM = TestUtils.addOrOverrideProperty(connectionStringNTLM, "authenticationScheme",
                     "NTLM");
             connectionStringNTLM = TestUtils.addOrOverrideProperty(connectionStringNTLM, "integratedSecurity", "true");
+        }
+
+        if (Boolean.parseBoolean(integratedSecurity) && authenticationScheme.equals("JavaKerberos")) {
+            connectionStringKerberos = TestUtils.addOrOverrideProperty(connectionStringKerberos, "integratedSecurity", "true");
+            connectionStringKerberos = TestUtils.addOrOverrideProperty(connectionStringKerberos, "authenticationScheme", "JavaKerberos");
         }
 
         ds = updateDataSource(connectionString, new SQLServerDataSource());

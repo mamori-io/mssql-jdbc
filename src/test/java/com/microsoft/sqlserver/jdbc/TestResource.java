@@ -203,5 +203,6 @@ public final class TestResource extends ListResourceBundle {
             {"R_connectTimedOut", "connect timed out"},
             {"R_sessionKilled", "Cannot continue the execution because the session is in the kill state"},
             {"R_failedFedauth", "Failed to acquire fedauth token: "},
+            {"R_noLoginModulesConfiguredForJdbcDriver", "Kerberos Login failed: Integrated authentication failed. ClientConnectionId:1d1b51b5-7e23-49ac-b3e4-d3474f8a1f9b due to javax.security.auth.login.LoginException (No LoginModules configured for SQLJDBCDriver)"},
             {"R_unexpectedThreadCount", "Thread count is higher than expected."}};
 }
