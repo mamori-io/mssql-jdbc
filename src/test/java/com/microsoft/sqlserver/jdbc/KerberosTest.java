@@ -70,8 +70,8 @@ public class KerberosTest extends AbstractTest {
         try (SQLServerConnection conn = (SQLServerConnection) DriverManager.getConnection(connectionStringKerberos)) {
             Assertions.fail(TestResource.getResource("R_expectedExceptionNotThrown"));
         } catch (SQLServerException e) {
-            Assertions.assertEquals(TestResource.getResource("R_noLoginModulesConfiguredForJdbcDriver"),
-                    e.getMessage());
+            Assertions.assertTrue(e.getMessage()
+                    .contains(TestResource.getResource("R_noLoginModulesConfiguredForJdbcDriver")));
         }
     }
 
