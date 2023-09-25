@@ -5,9 +5,10 @@
 
 package com.microsoft.sqlserver.jdbc;
 
-import java.io.PrintWriter;
+import java.io.*;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.SQLFeatureNotSupportedException;
 import java.util.Enumeration;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -15,7 +16,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.naming.Reference;
+import javax.naming.Referenceable;
 import javax.naming.StringRefAddr;
+import javax.sql.DataSource;
 
 import org.ietf.jgss.GSSCredential;
 
@@ -24,13 +27,13 @@ import org.ietf.jgss.GSSCredential;
  * Contains a list of properties specific for the {@link SQLServerConnection} class.
  */
 public class SQLServerDataSource
-        implements ISQLServerDataSource, javax.sql.DataSource, java.io.Serializable, javax.naming.Referenceable {
+        implements ISQLServerDataSource, DataSource, Serializable, Referenceable {
     // dsLogger is logger used for all SQLServerDataSource instances.
-    static final java.util.logging.Logger dsLogger = java.util.logging.Logger
+    static final Logger dsLogger = Logger
             .getLogger("com.microsoft.sqlserver.jdbc.internals.SQLServerDataSource");
-    static final java.util.logging.Logger loggerExternal = java.util.logging.Logger
+    static final Logger loggerExternal = Logger
             .getLogger("com.microsoft.sqlserver.jdbc.DataSource");
-    static final private java.util.logging.Logger parentLogger = java.util.logging.Logger
+    static final private Logger parentLogger = Logger
             .getLogger("com.microsoft.sqlserver.jdbc");
 
     static final String TRUSTSTORE_PASSWORD_STRIPPED = "trustStorePasswordStripped";
@@ -153,7 +156,7 @@ public class SQLServerDataSource
     }
 
     @Override
-    public Logger getParentLogger() throws java.sql.SQLFeatureNotSupportedException {
+    public Logger getParentLogger() throws SQLFeatureNotSupportedException {
         return parentLogger;
     }
 
@@ -725,7 +728,7 @@ public class SQLServerDataSource
 
     @Override
     public String getWorkstationID() {
-        if (loggerExternal.isLoggable(java.util.logging.Level.FINER))
+        if (loggerExternal.isLoggable(Level.FINER))
             loggerExternal.entering(getClassNameLogging(), "getWorkstationID");
         String getWSID = connectionProps.getProperty(SQLServerDriverStringProperty.WORKSTATION_ID.toString());
         // Per spec, return what the logon will send here if workstationID
@@ -1313,7 +1316,7 @@ public class SQLServerDataSource
      *        no property value is set.
      */
     private void setStringProperty(Properties props, String propKey, String propValue) {
-        if (loggerExternal.isLoggable(java.util.logging.Level.FINER) && !propKey.contains("password")
+        if (loggerExternal.isLoggable(Level.FINER) && !propKey.contains("password")
                 && !propKey.contains("Password")) {
             loggerExternal.entering(getClassNameLogging(), "set" + propKey, propValue);
         } else
@@ -1333,12 +1336,12 @@ public class SQLServerDataSource
      *         not set.
      */
     private String getStringProperty(Properties props, String propKey, String defaultValue) {
-        if (loggerExternal.isLoggable(java.util.logging.Level.FINER))
+        if (loggerExternal.isLoggable(Level.FINER))
             loggerExternal.entering(getClassNameLogging(), "get" + propKey);
         String propValue = props.getProperty(propKey);
         if (null == propValue)
             propValue = defaultValue;
-        if (loggerExternal.isLoggable(java.util.logging.Level.FINER) && !propKey.contains("password")
+        if (loggerExternal.isLoggable(Level.FINER) && !propKey.contains("password")
                 && !propKey.contains("Password"))
             loggerExternal.exiting(getClassNameLogging(), "get" + propKey, propValue);
         return propValue;
@@ -1353,7 +1356,7 @@ public class SQLServerDataSource
      *        Caller will always supply a non-null props and propKey.
      */
     private void setIntProperty(Properties props, String propKey, int propValue) {
-        if (loggerExternal.isLoggable(java.util.logging.Level.FINER))
+        if (loggerExternal.isLoggable(Level.FINER))
             loggerExternal.entering(getClassNameLogging(), "set" + propKey, propValue);
         props.setProperty(propKey, Integer.toString(propValue));
         loggerExternal.exiting(getClassNameLogging(), "set" + propKey);
@@ -1364,7 +1367,7 @@ public class SQLServerDataSource
      * defaultValue if the specific property value is not set.
      */
     private int getIntProperty(Properties props, String propKey, int defaultValue) {
-        if (loggerExternal.isLoggable(java.util.logging.Level.FINER))
+        if (loggerExternal.isLoggable(Level.FINER))
             loggerExternal.entering(getClassNameLogging(), "get" + propKey);
         String propValue = props.getProperty(propKey);
         int value = defaultValue;
@@ -1377,7 +1380,7 @@ public class SQLServerDataSource
                 assert false : "Bad portNumber:-" + propValue;
             }
         }
-        if (loggerExternal.isLoggable(java.util.logging.Level.FINER))
+        if (loggerExternal.isLoggable(Level.FINER))
             loggerExternal.exiting(getClassNameLogging(), "get" + propKey, value);
         return value;
     }
@@ -1386,7 +1389,7 @@ public class SQLServerDataSource
      * Set a boolean property value. Caller will always supply a non-null props and propKey.
      */
     private void setBooleanProperty(Properties props, String propKey, boolean propValue) {
-        if (loggerExternal.isLoggable(java.util.logging.Level.FINER))
+        if (loggerExternal.isLoggable(Level.FINER))
             loggerExternal.entering(getClassNameLogging(), "set" + propKey, propValue);
         props.setProperty(propKey, (propValue) ? "true" : "false");
         loggerExternal.exiting(getClassNameLogging(), "set" + propKey);
@@ -1397,7 +1400,7 @@ public class SQLServerDataSource
      * defaultValue if the specific property value is not set.
      */
     private boolean getBooleanProperty(Properties props, String propKey, boolean defaultValue) {
-        if (loggerExternal.isLoggable(java.util.logging.Level.FINER))
+        if (loggerExternal.isLoggable(Level.FINER))
             loggerExternal.entering(getClassNameLogging(), "get" + propKey);
         String propValue = props.getProperty(propKey);
         boolean value;
@@ -1413,7 +1416,7 @@ public class SQLServerDataSource
     }
 
     private void setObjectProperty(Properties props, String propKey, Object propValue) {
-        if (loggerExternal.isLoggable(java.util.logging.Level.FINER)) {
+        if (loggerExternal.isLoggable(Level.FINER)) {
             loggerExternal.entering(getClassNameLogging(), "set" + propKey);
         }
         if (null != propValue) {
@@ -1423,7 +1426,7 @@ public class SQLServerDataSource
     }
 
     private Object getObjectProperty(Properties props, String propKey, Object defaultValue) {
-        if (loggerExternal.isLoggable(java.util.logging.Level.FINER))
+        if (loggerExternal.isLoggable(Level.FINER))
             loggerExternal.entering(getClassNameLogging(), "get" + propKey);
         Object propValue = props.get(propKey);
         if (null == propValue)
@@ -1550,7 +1553,7 @@ public class SQLServerDataSource
      * @param ref
      *        Called by SQLServerDataSourceObjectFactory to initialize new DataSource instance.
      */
-    void initializeFromReference(javax.naming.Reference ref) {
+    void initializeFromReference(Reference ref) {
         // Enumerate all the StringRefAddr objects in the Reference and assign
         // properties appropriately.
         Enumeration<?> e = ref.getAll();
@@ -1606,10 +1609,10 @@ public class SQLServerDataSource
      * writeReplace
      *
      * @return serialization proxy
-     * @throws java.io.ObjectStreamException
+     * @throws ObjectStreamException
      *         if error
      */
-    private Object writeReplace() throws java.io.ObjectStreamException {
+    private Object writeReplace() throws ObjectStreamException {
         return new SerializationProxy(this);
     }
 
@@ -1619,17 +1622,25 @@ public class SQLServerDataSource
      *
      * @param stream
      *        input stream object
-     * @throws java.io.InvalidObjectException
+     * @throws InvalidObjectException
      *         if error
      */
-    private void readObject(java.io.ObjectInputStream stream) throws java.io.InvalidObjectException {
-        throw new java.io.InvalidObjectException("");
+    private void readObject(ObjectInputStream stream) throws InvalidObjectException {
+        throw new InvalidObjectException("");
+    }
+
+    public void setFailFast(boolean failFast) {
+        setBooleanProperty(connectionProps, SQLServerDriverBooleanProperty.FAIL_FAST.toString(), failFast);
+    }
+
+    public boolean isFailFast() {
+        return getBooleanProperty(connectionProps, SQLServerDriverBooleanProperty.FAIL_FAST.toString(), false);
     }
 
     /**
      * This code is duplicated in pooled and XA datasource classes.
      */
-    private static class SerializationProxy implements java.io.Serializable {
+    private static class SerializationProxy implements Serializable {
         private final Reference ref;
         private static final long serialVersionUID = 654661379542314226L;
 

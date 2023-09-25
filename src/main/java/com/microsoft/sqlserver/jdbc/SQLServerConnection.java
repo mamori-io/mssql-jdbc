@@ -247,6 +247,9 @@ public class SQLServerConnection implements ISQLServerConnection, java.io.Serial
     /** connect retry interval */
     private int connectRetryInterval = 0;
 
+    /** flag to cause connections to fail on any error */
+    private boolean failFast = SQLServerDriverBooleanProperty.FAIL_FAST.getDefaultValue();
+
     /** flag indicating whether prelogin TLS handshake is required */
     private boolean isTDS8 = false;
 
@@ -1856,7 +1859,7 @@ public class SQLServerConnection implements ISQLServerConnection, java.io.Serial
                         }
                     }
 
-                    if (0 == connectRetryCount) {
+                    if (0 == connectRetryCount || failFast) {
                         // connection retry disabled
                         throw e;
                     } else if (connectRetryAttempt++ > connectRetryCount) {
@@ -3007,6 +3010,14 @@ public class SQLServerConnection implements ISQLServerConnection, java.io.Serial
                     }
                 }
 
+                sPropKey = SQLServerDriverBooleanProperty.FAIL_FAST.toString();
+                sPropValue = activeConnectionProperties.getProperty(sPropKey);
+                if (sPropValue == null) {
+                    sPropValue = Boolean.toString(SQLServerDriverBooleanProperty.FAIL_FAST.getDefaultValue());
+                    activeConnectionProperties.setProperty(sPropKey, sPropValue);
+                }
+                failFast = isBooleanPropertyOn(sPropKey, sPropValue);
+
                 long startTime = System.currentTimeMillis();
                 sessionRecovery.setLoginParameters(instanceValue, nPort, fo,
                         ((loginTimeoutSeconds > queryTimeoutSeconds) && queryTimeoutSeconds > 0) ? queryTimeoutSeconds
@@ -3237,7 +3248,8 @@ public class SQLServerConnection implements ISQLServerConnection, java.io.Serial
             } catch (SQLServerException sqlex) {
                 int errorCode = sqlex.getErrorCode();
                 int driverErrorCode = sqlex.getDriverErrorCode();
-                if (SQLServerException.LOGON_FAILED == errorCode // logon failed, ie bad password
+                if (failFast
+                        || SQLServerException.LOGON_FAILED == errorCode // logon failed, ie bad password
                         || SQLServerException.PASSWORD_EXPIRED == errorCode // password expired
                         || SQLServerException.USER_ACCOUNT_LOCKED == errorCode // user account locked
                         || SQLServerException.DRIVER_ERROR_INVALID_TDS == driverErrorCode // invalid TDS

@@ -5,9 +5,12 @@
 package com.microsoft.sqlserver.jdbc.connection;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
-import com.microsoft.sqlserver.jdbc.TestUtils;
+import com.microsoft.sqlserver.jdbc.*;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.runner.JUnitPlatform;
@@ -15,8 +18,6 @@ import org.junit.runner.RunWith;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
-import com.microsoft.sqlserver.jdbc.TestResource;
 import com.microsoft.sqlserver.testframework.AbstractTest;
 
 
@@ -43,6 +44,33 @@ public class ConnectionTest extends AbstractTest {
         try (Connection con = ds.getConnection()) {}
 
         try (Connection con = ds.getConnection()) {}
+    }
+
+    @Test
+    public void testFailFastDatasourceConnection() {
+        SQLServerDataSource ds = new SQLServerDataSource();
+        ds.setURL(connectionString);
+        ds.setDatabaseName("hghghghghghghghgh");
+        ds.setFailFast(true);
+
+        try (Connection con = ds.getConnection()) {
+            con.close();
+            Assertions.fail("The connection should have failed");
+        } catch (SQLException ignored) {
+        }
+    }
+
+    @Test
+    public void testFailFastUrlConnection() {
+        Properties props = new Properties();
+        props.setProperty("database", "hghghghghghghghghg");
+        props.setProperty("failFast", "true");
+
+        try (Connection con = DriverManager.getConnection(connectionString, props)) {
+            con.close();
+            Assertions.fail("The connection should have failed");
+        } catch (SQLException ignored) {
+        }
     }
 
     @Test
